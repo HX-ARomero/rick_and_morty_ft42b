@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import styles from "./Card.module.css"; // { }
+
 
 export default function Card(props) {
    // console.log(props.origin);
@@ -11,7 +13,9 @@ export default function Card(props) {
          <h4>{props.species}</h4>
          <h4>{props.gender}</h4>
          <h4>{props.origin}</h4>
-         <img src={props.image} alt={props.name} />
+         <Link to={`/detail/${props.id}`} >
+            <img src={props.image} alt={props.name} />
+         </Link>
       </div>
    );
 }
