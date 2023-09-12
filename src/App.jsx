@@ -4,6 +4,7 @@ import axios from "axios";
 import About from './components/about/About';
 import Cards from './components/cards/Cards.jsx';
 import Detail from './components/detail/Detail';
+import Favorites from './components/favorites/Favorites';
 import Form from './components/form/Form';
 import Nav from './components/nav/Nav';
 import './App.css';
@@ -28,19 +29,20 @@ function App() {
    }
 
    useEffect(() => {
-      !access && navigate('/'); //! Ingresar a /home
+      !access && navigate('/home'); //! Ingresar a /home
    }, [access]);
 
    const location = useLocation();
    console.log(location.pathname);
 
    function onSearch(id) {
-      axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
-         if (data.name) {
-            setCharacters((oldChars) => [...oldChars, data]);
-         } else {
-            window.alert('¡No hay personajes con este ID!');
-         }
+      axios(`https://rickandmortyapi.com/api/character/${id}`)
+         .then(({ data }) => {
+            if (data.name) {
+               setCharacters((oldChars) => [...oldChars, data]);
+            } else {
+               window.alert('¡No hay personajes con este ID!');
+            }
       });
    }
 
@@ -73,6 +75,10 @@ function App() {
             <Route
                path="/detail/:id"
                element={<Detail />}
+            />
+            <Route
+               path="/favorites"
+               element={<Favorites onClose={onClose} />}
             />
             <Route
                path="*"
