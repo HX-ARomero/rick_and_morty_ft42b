@@ -6,17 +6,17 @@ import { useEffect, useState } from "react";
 
 
 function Card(props) {
-   // props = { addFav, removeFav, myFavorites, id, name, origin, ... }
+   // props = { addFav, removeFav, allCharacters, id, name, origin, ... }
    console.log(props)
    const [isFav, setIsFav] = useState(false); // true <=> false
 
    useEffect(() => {
-      props.myFavorites.forEach((fav) => {
+      props.allCharacters.forEach((fav) => {
          if (fav.id === props.id) {
             setIsFav(true);
          }
       });
-   }, [props.myFavorites]);
+   }, [props.allCharacters]);
 
    const handleFavorite = event => {
       if(isFav) {
@@ -53,7 +53,8 @@ function Card(props) {
 
 const mapStateToProps = state => {
    return {
-      myFavorites: state.myFavorites
+      //! Traemos "allCharacters"
+      allCharacters: state.allCharacters
    }
 }
 
