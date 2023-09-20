@@ -36,7 +36,7 @@ function App() {
    console.log(location.pathname);
 
    function onSearch(id) {
-      axios(`https://rickandmortyapi.com/api/character/${id}`)
+      axios(`http://localhost:3001/rickandmorty/character/${id}`)
          .then(({ data }) => {
             if (data.name) {
                setCharacters((oldChars) => [...oldChars, data]);
