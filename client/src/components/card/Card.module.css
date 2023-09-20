@@ -1,0 +1,20 @@
+.container {
+    /* border: 1px solid grey; */
+    background-color: darkslategrey;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    &:hover {
+        box-shadow: 0 5px 25px black;
+    }
+}
+
+.container img {
+    width: 200px;
+    box-shadow: 0 5px 25px black;
+}
+
+h1 {
+    color: beige;
+    font-size: 1em;
+}
