@@ -3,7 +3,8 @@ import { ADD_FAV, FILTER, ORDER, REMOVE_FAV } from "./action-types";
 const initialState = {
     myFavorites: [], //* [ {rick}, {morty, id: 2}, {beth} ]
     allCharacters: [],
-    user: ""
+    user: "",
+    errors: false
 }
 
 export default function reducer( state = initialState, {type, payload}) {
@@ -47,6 +48,13 @@ export default function reducer( state = initialState, {type, payload}) {
                 ...state,
                 myFavorites: orderCopy
             }
+        case "ERROR":
+            console.log(payload);
+            return {
+                ...state,
+                errors: payload
+            }
+
         default:
             return {...state}
     }

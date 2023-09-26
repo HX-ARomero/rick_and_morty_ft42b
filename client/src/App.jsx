@@ -19,40 +19,35 @@ function App() {
    const EMAIL = 'ejemplo@gmail.com';
    const PASSWORD = '123456';
 
-   // function login(userData) {
-   //    if (userData.password === PASSWORD && userData.email === EMAIL) {
-   //       setAccess(true);
-   //       navigate('/home');
-   //    } else {
-   //       alert("Por favor ingrese sus credenciales...")
-   //    }
-   // }
-   function login(userData) {
-      const { email, password } = userData;
-      const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
-         const { access } = data;
-         setAccess(data);
-         access && navigate('/home');
-      });
+   async function login(userData) {
+      try {
+         const { email, password } = userData;
+         const URL = 'http://localhost:3001/rickandmorty/login';
+         const { data } = await axios(URL + `?email=${email}&password=${password}`); //* { access: true }
+         setAccess(data.access);
+         data.access && navigate('/home');
+         if(!data.access) alert("No Access!!!")
+      } catch (error) {
+         console.log(error);
+      }
    }
 
    useEffect(() => {
-      !access && navigate('/home'); //! Ingresar a /home
+      !access && navigate('/'); //! Ingresar a /home
    }, [access]);
 
    const location = useLocation();
-   console.log(location.pathname);
+   // console.log(location.pathname);
 
-   function onSearch(id) {
-      axios(`http://localhost:3001/rickandmorty/character/${id}`)
-         .then(({ data }) => {
-            if (data.name) {
-               setCharacters((oldChars) => [...oldChars, data]);
-            } else {
-               window.alert('¡No hay personajes con este ID!');
-            }
-      });
+   async function onSearch(id) {
+      const charById = characters.filter(char => char.id === Number(id)); //* [] || [{...}]
+      if(charById.length) return alert("The character alredy exists!!!");
+      try {
+         const { data } = await axios.get(`http://localhost:3001/rickandmorty/character/${id}`);
+         setCharacters((oldChars) => [...oldChars, data]);
+      } catch (error) {
+         alert(error);
+      }
    }
 
    const onClose = (id) => {
