@@ -14,6 +14,7 @@ export default function Cards({characters, onClose}) {
                <Card
                   id={character.id}
                   // onClose={onClose}
+                  //* caracter = {id(string), name(string), origin({name(string)})}
                   key={index}
                   name={character.name}
                   status={character.status}
