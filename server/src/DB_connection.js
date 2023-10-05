@@ -17,9 +17,7 @@ const sequelize = new Sequelize(
 // EJERCICIO 05
 // Debajo de este comentario puedes ejecutar la función de los modelos.
 FavoriteModel(sequelize);
-//
 UserModel(sequelize);
-//
 
 // Ejercicio 06
 // ¡Relaciona tus modelos aquí abajo!
